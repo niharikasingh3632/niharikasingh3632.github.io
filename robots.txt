@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://niharikasingh3632.github.io/sitemap.xml
+Sitemap: https://niharikascode.github.io/sitemap.xml
