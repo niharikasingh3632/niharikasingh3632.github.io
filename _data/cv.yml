@@ -58,9 +58,11 @@ cv:
         location: Bangalore, Karnataka
         start_date: 2025
         end_date: Present
-        summary: Architect technical designs for QpiAI PRO, translating broad requirements into production-ready AI systems. Bridge the gap between AI research and functional features by building high-throughput pipelines, contributing to product roadmaps, and performing competitive analysis to ensure commercially viable solutions.
-          - "Developed an auto-annotation engine and vision workflows leveraging the Qwen-VL family and SAM2."
-          - "Engineered high-throughput pipelines achieving 6x inference speedups for object segmentation and tracking."
+        summary: Architected production-ready AI systems for QpiAI PRO, building scalable pipelines and aligning research with commercially viable product features.
+        highlights:
+          - "Built an auto-annotation engine and vision workflows using Qwen-VL and SAM2."
+          - "Engineered high-throughput pipelines achieving 6x faster segmentation and tracking inference."
+          
 
     Volunteer:
       - company: Ministry of Youth Affairs & Sports, Government of India
@@ -126,9 +128,9 @@ cv:
 
     Skills:
       - name: Programming Languages
-        level: Master
-        icon: fa-solid fa-hashtag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
+        # level: Master
+        icon: fa-light fa-laptop-code
+        keywords: " Python, C++, SQL(MySQL)"
 
     Languages:
       - name: Hindi
@@ -164,5 +166,5 @@ cv:
         highlights:
           - Quantum Teleportation
           - Quantum Cryptography
-        start_date: 2018-01-01
-        end_date: 2018-01-01
+        # start_date: 2018-01-01
+        # end_date: 2018-01-01
