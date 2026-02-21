@@ -39,8 +39,9 @@ layout: default
 
   <article>
     <div class="cv">
-      {% comment %} Determine which CV format to render {% endcomment %}
-      {% assign render_rendercv = false %}
+
+      {% comment %} ── Determine which CV format to render ── {% endcomment %}
+      {% assign render_rendercv  = false %}
       {% assign render_jsonresume = false %}
 
       {% if page.cv_format == 'rendercv' %}
@@ -48,7 +49,7 @@ layout: default
       {% elsif page.cv_format == 'jsonresume' %}
         {% assign render_jsonresume = true %}
       {% else %}
-        {% comment %} Legacy behavior: RenderCV takes priority if both exist {% endcomment %}
+        {% comment %} Legacy: RenderCV takes priority if both exist {% endcomment %}
         {% if site.data.cv and site.data.cv.cv %}
           {% assign render_rendercv = true %}
         {% elsif site.data.resume %}
@@ -56,12 +57,17 @@ layout: default
         {% endif %}
       {% endif %}
 
+
+      {% comment %}
+        ════════════════════════════════════════════
+          RENDERCV FORMAT
+        ════════════════════════════════════════════
+      {% endcomment %}
       {% if render_rendercv and site.data.cv and site.data.cv.cv %}
-        {% comment %} RenderCV format {% endcomment %}
         {% assign cv = site.data.cv.cv %}
 
-        <!-- Header/Contact Information -->
-        {% if cv.name or cv.label or cv.location or cv.email or cv.phone or cv.website %}
+        {% comment %} ── Contact Information ── {% endcomment %}
+        {% if cv.name or cv.label or cv.email or cv.phone or cv.address or cv.website %}
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">Contact Information</h3>
             <table class="table table-cv table-sm table-borderless">
@@ -112,7 +118,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Summary -->
+        {% comment %} ── Professional Summary ── {% endcomment %}
         {% if cv.summary %}
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">Professional Summary</h3>
@@ -120,29 +126,35 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- RenderCV Sections - Merge Experience and Volunteer -->
-        {% comment %} First, combine Experience and Volunteer entries {% endcomment %}
-        {% assign empty_array = '' | split: ',' %}
-        {% assign exp = cv.sections.Experience | default: empty_array %}
-        {% assign vol = cv.sections.Volunteer | default: empty_array %}
-        {% assign combined_experience = exp | concat: vol %}
-        {% if combined_experience.size > 0 %}
+        {% comment %} ── Experience ── {% endcomment %}
+        {% if cv.sections.Experience.size > 0 %}
           <a class="anchor" id="experience"></a>
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">Experience</h3>
             <div>
-              {% assign entries = combined_experience %}
+              {% assign entries = cv.sections.Experience %}
               {% include cv/experience.liquid %}
             </div>
           </div>
         {% endif %}
 
-        {% comment %} Now render all other sections except Experience and Volunteer {% endcomment %}
+        {% comment %} ── Volunteer ── {% endcomment %}
+        {% if cv.sections.Volunteer.size > 0 %}
+          <a class="anchor" id="volunteer"></a>
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">Volunteer</h3>
+            <div>
+              {% assign entries = cv.sections.Volunteer %}
+              {% include cv/experience.liquid %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% comment %} ── All other sections (skip Experience & Volunteer) ── {% endcomment %}
         {% for section_pair in cv.sections %}
-          {% assign section_title = section_pair[0] %}
+          {% assign section_title   = section_pair[0] %}
           {% assign section_entries = section_pair[1] %}
 
-          {% comment %} Skip Experience and Volunteer as we've already processed them combined {% endcomment %}
           {% if section_title == 'Experience' or section_title == 'Volunteer' %}
             {% continue %}
           {% endif %}
@@ -179,7 +191,7 @@ layout: default
                 {% assign entries = section_entries %}
                 {% include cv/references.liquid %}
               {% else %}
-                <!-- Generic section -->
+                {% comment %} Generic fallback section {% endcomment %}
                 {% for entry in section_entries %}
                   {% if entry.bullet %}
                     <ul class="card-text font-weight-light list-group list-group-flush">
@@ -196,14 +208,19 @@ layout: default
           </div>
         {% endfor %}
 
-      {% elsif render_jsonresume and site.data.resume %}
-        {% comment %} JSONResume format {% endcomment %}
 
-        <!-- Contact Information -->
+      {% comment %}
+        ════════════════════════════════════════════
+          JSONRESUME FORMAT
+        ════════════════════════════════════════════
+      {% endcomment %}
+      {% elsif render_jsonresume and site.data.resume %}
+
+        {% comment %} ── Contact Information ── {% endcomment %}
         {% if site.data.resume.basics %}
+          {% assign basics = site.data.resume.basics %}
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">Contact Information</h3>
-            {% assign basics = site.data.resume.basics %}
             <table class="table table-cv table-sm table-borderless">
               {% if basics.name %}
                 <tr>
@@ -252,7 +269,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Summary -->
+        {% comment %} ── Professional Summary ── {% endcomment %}
         {% if site.data.resume.basics.summary %}
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">Professional Summary</h3>
@@ -260,23 +277,31 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- JSONResume Sections - Merge work and volunteer into Experience -->
-        {% assign empty_array = '' | split: ',' %}
-        {% assign work = site.data.resume.work | default: empty_array %}
-        {% assign vol = site.data.resume.volunteer | default: empty_array %}
-        {% assign combined_experience = work | concat: vol %}
-        {% if combined_experience.size > 0 %}
+        {% comment %} ── Experience (work only) ── {% endcomment %}
+        {% if site.data.resume.work.size > 0 %}
           <a class="anchor" id="experience"></a>
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">Experience</h3>
             <div>
-              {% assign entries = combined_experience %}
+              {% assign entries = site.data.resume.work %}
               {% include cv/experience.liquid %}
             </div>
           </div>
         {% endif %}
 
-        <!-- Education -->
+        {% comment %} ── Volunteer (separate section) ── {% endcomment %}
+        {% if site.data.resume.volunteer.size > 0 %}
+          <a class="anchor" id="volunteer"></a>
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">Volunteer</h3>
+            <div>
+              {% assign entries = site.data.resume.volunteer %}
+              {% include cv/experience.liquid %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% comment %} ── Education ── {% endcomment %}
         {% if site.data.resume.education.size > 0 %}
           <a class="anchor" id="education"></a>
           <div class="card mt-3 p-3">
@@ -288,7 +313,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Awards -->
+        {% comment %} ── Awards ── {% endcomment %}
         {% if site.data.resume.awards.size > 0 %}
           <a class="anchor" id="awards"></a>
           <div class="card mt-3 p-3">
@@ -300,7 +325,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Publications -->
+        {% comment %} ── Publications ── {% endcomment %}
         {% if site.data.resume.publications.size > 0 %}
           <a class="anchor" id="publications"></a>
           <div class="card mt-3 p-3">
@@ -312,7 +337,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Skills -->
+        {% comment %} ── Skills ── {% endcomment %}
         {% if site.data.resume.skills.size > 0 %}
           <a class="anchor" id="skills"></a>
           <div class="card mt-3 p-3">
@@ -324,7 +349,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Languages -->
+        {% comment %} ── Languages ── {% endcomment %}
         {% if site.data.resume.languages.size > 0 %}
           <a class="anchor" id="languages"></a>
           <div class="card mt-3 p-3">
@@ -336,7 +361,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Interests -->
+        {% comment %} ── Interests ── {% endcomment %}
         {% if site.data.resume.interests.size > 0 %}
           <a class="anchor" id="interests"></a>
           <div class="card mt-3 p-3">
@@ -348,7 +373,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Certificates -->
+        {% comment %} ── Certificates ── {% endcomment %}
         {% if site.data.resume.certificates.size > 0 %}
           <a class="anchor" id="certificates"></a>
           <div class="card mt-3 p-3">
@@ -360,7 +385,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- Projects -->
+        {% comment %} ── Projects ── {% endcomment %}
         {% if site.data.resume.projects.size > 0 %}
           <a class="anchor" id="projects"></a>
           <div class="card mt-3 p-3">
@@ -372,7 +397,7 @@ layout: default
           </div>
         {% endif %}
 
-        <!-- References -->
+        {% comment %} ── References ── {% endcomment %}
         {% if site.data.resume.references.size > 0 %}
           <a class="anchor" id="references"></a>
           <div class="card mt-3 p-3">
@@ -387,6 +412,7 @@ layout: default
       {% else %}
         <p>No CV data found. Please configure either RenderCV (cv.yml) or JSONResume (resume.json) data.</p>
       {% endif %}
+
     </div>
   </article>
 </div>
