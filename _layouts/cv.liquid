@@ -138,18 +138,6 @@ layout: default
           </div>
         {% endif %}
 
-        {% comment %} ── Volunteer ── {% endcomment %}
-        {% if cv.sections.Volunteer.size > 0 %}
-          <a class="anchor" id="volunteer"></a>
-          <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Volunteer</h3>
-            <div>
-              {% assign entries = cv.sections.Volunteer %}
-              {% include cv/experience.liquid %}
-            </div>
-          </div>
-        {% endif %}
-
         {% comment %} ── All other sections (skip Experience & Volunteer) ── {% endcomment %}
         {% for section_pair in cv.sections %}
           {% assign section_title   = section_pair[0] %}
@@ -207,6 +195,18 @@ layout: default
             </div>
           </div>
         {% endfor %}
+
+        {% comment %} ── Volunteer (at the end) ── {% endcomment %}
+        {% if cv.sections.Volunteer.size > 0 %}
+          <a class="anchor" id="volunteer"></a>
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">Volunteer</h3>
+            <div>
+              {% assign entries = cv.sections.Volunteer %}
+              {% include cv/experience.liquid %}
+            </div>
+          </div>
+        {% endif %}
 
 
       {% comment %}
@@ -284,18 +284,6 @@ layout: default
             <h3 class="card-title font-weight-medium">Experience</h3>
             <div>
               {% assign entries = site.data.resume.work %}
-              {% include cv/experience.liquid %}
-            </div>
-          </div>
-        {% endif %}
-
-        {% comment %} ── Volunteer (separate section) ── {% endcomment %}
-        {% if site.data.resume.volunteer.size > 0 %}
-          <a class="anchor" id="volunteer"></a>
-          <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Volunteer</h3>
-            <div>
-              {% assign entries = site.data.resume.volunteer %}
               {% include cv/experience.liquid %}
             </div>
           </div>
@@ -405,6 +393,18 @@ layout: default
             <div>
               {% assign entries = site.data.resume.references %}
               {% include cv/references.liquid %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% comment %} ── Volunteer (at the end) ── {% endcomment %}
+        {% if site.data.resume.volunteer.size > 0 %}
+          <a class="anchor" id="volunteer"></a>
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">Volunteer</h3>
+            <div>
+              {% assign entries = site.data.resume.volunteer %}
+              {% include cv/experience.liquid %}
             </div>
           </div>
         {% endif %}
