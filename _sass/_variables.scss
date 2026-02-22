@@ -26,7 +26,7 @@ $yellow-color: #efcc00 !default;
 $navy-blue-color: #111a23 !default;
 $orange-color-600: #d97706 !default;
 $bg-color-1: #363E47 !default;
-$theme-color-1: #2698ba !default;
+$theme-color-1: color.adjust($cyan-color, $lightness: 25%);
 
 
 $grey-color: #828282 !default;
