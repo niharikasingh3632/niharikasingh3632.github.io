@@ -131,6 +131,21 @@ cv:
         # level: Master
         icon: fa-light fa-laptop-code
         keywords: " Python, C++, SQL(MySQL)"
+      
+      - name: Machine Learning & Deep Learning
+        keywords: "PyTorch, Hugging Face, OpenCV, scikit-learn"
+      
+      - name: Computer Vision
+        keywords: "Object Detection, Multi-Object Tracking, Instance Segmentation"
+      
+      - name: LLMs & Multimodal AI
+        keywords: "Vision-Language Models, RAG, Multimodal Reasoning"
+      
+      - name: MLOps & Deployment
+        keywords: "Flyte, Docker, Kubernetes, FastAPI, AWS (EC2, S3, Bedrock)"
+
+      - name: Data & Tools
+        keywords: "NumPy, Pandas, Matplotlib, Parallel Processing, Data Engineering"
 
     Languages:
       - name: Hindi
@@ -140,31 +155,32 @@ cv:
         summary: "Fluent"
 
     Interests:
-      - name: Physics
+      - name: Computer Vision
         icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
+        keywords: "Object Detection, Object Tracking, Real Time Object Detection, Instance Segmentation, Video Processing, Vision Language Models"
 
     Certificates:
-      - name: Machine Learning
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-location-dot
 
-      - name: Quantum Computing
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-tag
-
-      - name: Quantum Information
-        date: 2018-01-01
-        issuer: Stanford University
+      - name: Machine Learning and Reinforcement Learning in Finance
+        date: 2024-05
+        issuer: New York University
         icon: fa-solid fa-envelope
 
+      - name: Machine Learning Engineering for Production (MLOps)
+        date: 2024-05
+        issuer: DeepLearning.AI
+        icon: fa-solid fa-location-dot
+
     Projects:
-      - name: Quantum Computing
-        summary: Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.
+      - name: Auto Annotation Engine
+        summary: PyTorch, Florence-2, OpenCV, YOLO
         highlights:
-          - Quantum Teleportation
-          - Quantum Cryptography
-        # start_date: 2018-01-01
+          - Developed an auto-annotation pipeline using Florence-2, speeding up labeling by 10x while reducing manual effort by 85%.
+          - Designed batch processing workflows to generate 1,000+ high-quality YOLO labels and improve dataset preparation at scale.
         # end_date: 2018-01-01
+      
+      - name: Mental Health Counseling Summarization
+        summary: PyTorch, Hugging Face Transformers, NLP, NLTK, BERTScore
+        highlights:
+          - Built an NLP summarization system using T5 and PEGASUS to summarize counseling sessions, reducing manual summarization effort by 60-70%.
+          - Implemented speaker-aware preprocessing and emotion scoring across 12.9K utterances; achieved BERTScore 0.54 vs baseline models.
