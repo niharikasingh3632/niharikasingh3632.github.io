@@ -256,20 +256,20 @@ jekyll-archives:
     - tags
 
   layouts:
-    year: archive-year
-    month: archive-month
-    category: archive-category
-    tag: archive-tag
+    year: archive
+    month: archive
+    category: archive
+    tag: archive
 
   permalinks:
     year: /archives/:year/
     month: /archives/:year/:month/
-    category: /category/:name/
-    tag: /tag/:name/
+    category: /blog/category/:name/
+    tag: /blog/tag/:name/
 
 
 display_tags: ["formatting", "images", "links", "math", "code", "blockquotes"] # these tags will be displayed on the front page of your blog
-display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
+# display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
