@@ -6,7 +6,8 @@ subtitle: AI Engineer at QpiAI, IIIT-Delhi CS'25
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: prof_pic3.jpg
+  image_style: "max-width: 20px; width: 60%;"
   image_circular: false # crops the image to make it circular
   # more_info: >
   #   <p>555 your office number</p>
