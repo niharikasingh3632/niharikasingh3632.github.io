@@ -15,3 +15,6 @@ node_modules/
 vendor
 my_readme.md 
 sample_posts
+_posts
+_news
+_config.yml
