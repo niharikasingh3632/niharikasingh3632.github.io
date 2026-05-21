@@ -30,12 +30,7 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "news-karpathy-39-s-autoresearch-tool-lets-ai-optimize-code-overnight",
-          title: 'Karpathy&amp;#39;s Autoresearch Tool Lets AI Optimize Code Overnight',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_1/";
-            },},{
+        },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',
